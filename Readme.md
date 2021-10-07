@@ -4,12 +4,26 @@ This script is designed to compute the theoretical amount of multiply-add operat
 in convolutional neural networks. It also can compute the number of parameters(TODO) and
 print per-layer computational cost of a given network.
 
+**Note**: most of the code I have given to the mindspore community, the subsequent may be integrated into the mindspore profile function.
+
 Supported layers:
 - Conv1d/2d/3d (including grouping)
 - BatchNorm1d/2d/3d, GroupNorm, InstanceNorm1d/2d/3d
 - Activations (ReLU, PReLU, ELU, ReLU6, LeakyReLU)
 - Dense
 - Poolings (AvgPool1d/2d/3d, MaxPool1d/2d/3d and adaptive ones)
+
+## Features & TODO
+**Note**: These features work only MindSpore.nn. Modules in MindSpore.ops are not supported yet.
+- [x] FLOPs
+- [ ] Number of Parameters
+- [ ] Total memory
+- [ ] Madd(FMA)
+- [ ] MemRead
+- [ ] MemWrite
+- [ ] Model summary(detail, layer-wise)
+- [ ] Export score table
+- [ ] Arbitrary input shape
 
 ## Example
 ```python
@@ -27,7 +41,7 @@ if __name__ == '__main__':
 
 ## Benchmark
 
-TODO:Fill a table about the data of more models in mindspore.modelzoo
+TODO:Fill a table about the data of more models in mindspore.modelzoo. And fix some errors between pytorch and mindspore results.
 
 Model         | Input Resolution | Flops 
 ---           |---               |---      
@@ -54,3 +68,17 @@ squeezenet_res         |224x224           | 711.5(M)
 shufflenetv1|224x224           | 536.78(M)
 shufflenetv2|224x224           | 149.6(M)
 efficientnetb0|224x224           | 392.55(M)
+
+## Toread
+There are still a lot of errors and imperfections, so I did not package to pypi. most of the code I have given to the mindspore community, the subsequent may be integrated into the mindspore profile function.
+This repository can be used as a lightweight tool alone, I will continue to improve it when I have time, and I welcome everyone to contribute and merge code.
+
+## References
+Thanks to @Swall0w & @Lyken17 for the initial version of flops computation, @Swall0w for the backbone of scripts.
+* [pytorch-OpCounter](https://github.com/Lyken17/pytorch-OpCounter)
+* [torchstat](https://github.com/Swall0w/torchstat).
+* [flops-counter.pytorch](https://github.com/sovrasov/flops-counter.pytorch)
+* [pytorch_model_summary](https://github.com/ceykmc/pytorch_model_summary)
+* [chainer_computational_cost](https://github.com/belltailjp/chainer_computational_cost)
+* [convnet-burden](https://github.com/albanie/convnet-burden).
+
